@@ -3,6 +3,10 @@ import axios from "axios";
 import ListProducts from "../components/products/ListProducts";
 import queryString from "query-string";
 
+export const metadata = {
+  title: "Next.js 13 Web App",
+};
+
 const getProducts = async (searchParams) => {
   const urlParams = {
     keyword: searchParams.keyword,

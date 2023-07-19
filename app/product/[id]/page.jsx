@@ -1,5 +1,6 @@
 import ProductDetails from "@/components/products/ProductDetails";
 import axios from "axios";
+
 import React from "react";
 
 const getProductDetails = async (id) => {
@@ -8,7 +9,12 @@ const getProductDetails = async (id) => {
 };
 
 const ProductDetailsPage = async ({ params }) => {
-  const product = await getProductDetails(params.id);
+  // const isValidId = mongoose.isValidObjectId(params?.id);
+  // if (!isValidId) {
+  //   return redirect("/");
+  // }
+
+  const product = await getProductDetails(params?.id);
 
   return <ProductDetails product={product} />;
 };
