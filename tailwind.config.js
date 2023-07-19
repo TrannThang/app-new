@@ -10,6 +10,9 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    // colors: {
+    //   transparent: "#0394A5",
+    // },
   },
   plugins: [],
 };

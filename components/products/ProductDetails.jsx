@@ -1,15 +1,28 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
 import StarRatings from "react-star-ratings";
 import BreadCrumbs from "../layouts/BreadCrumbs ";
+import CartContext from "@/context/CartContext";
 
 const ProductDetails = ({ product }) => {
+  const { addItemToCart } = useContext(CartContext);
   const imgRef = useRef(null);
   const setImgPreview = (url) => {
     imgRef.current.src = url;
   };
   const inStock = product?.stock >= 1;
+
+  const addToCartHandler = () => {
+    addItemToCart({
+      product: product._id,
+      name: product.name,
+      price: product.price,
+      image: product.images[0].url,
+      stock: product.stock,
+      seller: product.seller,
+    });
+  };
   const breadCrumbs = [
     { name: "Home", url: "/" },
     {
@@ -88,7 +101,11 @@ const ProductDetails = ({ product }) => {
               <p className="mb-4 text-gray-500">{product?.description}</p>
 
               <div className="flex flex-wrap gap-2 mb-5">
-                <button className="px-4 py-2 inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700">
+                <button
+                  onClick={addToCartHandler}
+                  disabled={!inStock}
+                  className="px-4 py-2 inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700"
+                >
                   <i className="fa fa-shopping-cart mr-2"></i>
                   Add to cart
                 </button>
@@ -120,7 +137,6 @@ const ProductDetails = ({ product }) => {
             </main>
           </div>
 
-          {/* <NewReview /> */}
           <hr />
 
           <div className="font-semibold">
